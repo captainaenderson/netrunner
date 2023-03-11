@@ -5,6 +5,12 @@ class Keys {
         this.x = x;
         this.y = y;
         this.ctx = ctx;
+        this.color = "white";
+    }
+
+    draw() {
+        this.ctx.fillStyle = this.color;
+        this.ctx.fillRect(this.x, this.y, this.width, this.height);
     }
 }
 
