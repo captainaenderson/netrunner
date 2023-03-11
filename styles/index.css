@@ -1,0 +1,15 @@
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+button {
+    color: red;
+    background-color: blue;
+}
+
+#canvas {
+    background-color: red;
+    display: flex;
+    
+}
