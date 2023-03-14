@@ -12,6 +12,20 @@ class Keys {
         this.ctx.fillStyle = this.color;
         this.ctx.fillRect(this.x, this.y, this.width, this.height);
     }
+
+    moveRight() {
+        if (this.x + this.width < this.ctx.canvas.width) {
+            this.x += 10;
+            console.log("test")
+        }
+    }
+
+    moveLeft(){
+        if (this.x > 0) {
+            this.x -= 10;
+        }
+    
+    }
 }
 
 export default Keys;
