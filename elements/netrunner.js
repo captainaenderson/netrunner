@@ -1,11 +1,13 @@
-class Keys {
-    constructor(x, y, ctx){
-        this.height = 50;
-        this.width = 50;
+class Netrunner {
+    constructor(x, y, ctx, life){
+        this.height = 20;
+        this.width = 20;
         this.x = x;
         this.y = y;
         this.ctx = ctx;
         this.color = "white";
+        this.life = life;
+        this.isTouched = false;
     }
 
     draw() {
@@ -16,7 +18,7 @@ class Keys {
     moveRight() {
         if (this.x + this.width < this.ctx.canvas.width) {
             this.x += 10;
-            console.log("test")
+            console.log("testright")
         }
     }
 
@@ -26,6 +28,16 @@ class Keys {
         }
     
     }
+
+    gainsLife(){
+        this.life++
+        console.log('Life gained, total lives:', this.life);
+    }
+
+    loseLife(){
+        this.life--
+        console.log('Life lost, total lives:', this.life)
+    }
 }
 
-export default Keys;
+export default Netrunner;
