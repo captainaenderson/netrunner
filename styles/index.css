@@ -17,6 +17,7 @@ button {
     border-radius: 10px;
     text-transform: uppercase ;
     font-family: "Press Start 2P";
+    font-size: 10px;
 }
 
 button:before {
@@ -78,7 +79,9 @@ button:after {
 }
 
 #canvas {
-   background-color: rgb(30, 30, 30);
+    background-image: url('/src/img/background.jpg');
+    background-size: cover;
+    background-position: center;
 }
 
 #animation {

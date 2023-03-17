@@ -58,13 +58,14 @@ function handleKeyDown(event) {
    }
 }
 
-
-
 // -------------------------- Start the Game ------------------------------ //
 
 window.onload = () => {
    document.getElementById('start-button').onclick = () => {
       play();
+      const sound = new Audio('../src/sounds/background.mp3');
+      sound.loop = true;
+      sound.play();
    };
 };
 
@@ -72,7 +73,7 @@ window.onload = () => {
 
 function play() {
    const interval = setInterval(function () {
-    document.addEventListener('keydown', handleKeyDown);
+      document.addEventListener('keydown', handleKeyDown);
       updateCanvas();
 
       // ---------------------- Creating codesnippets and moving them ----------------------- //
@@ -146,7 +147,7 @@ function play() {
                netrunner.gainsLife();
                codesnippet.isTouched = true; // mark the codesnippet as touched
                score++;
-               codesnippets.splice(index, 1); 
+               codesnippets.splice(index, 1);
                soundCodesnippet.play();
             }
          }
@@ -169,15 +170,14 @@ function play() {
                netrunner.loseLife();
                virus.isTouched = true; // mark the codesnippet as touched
                score--;
-               viruses.splice(index, 1); 
+               viruses.splice(index, 1);
                soundVirus.play();
             }
          }
       });
 
       // Display the score in the canvas
-      ctx.fillStyle = 'rgb(30, 30, 30)'; // Set the background color
-      ctx.fillRect(0, 0, canvas.width, 10); // Draw a rectangle with the background color
+      
       ctx.fillStyle = 'white';
       ctx.font = '12px "Press Start 2P"';
       ctx.fillText(`Code loading.. `, 10, 20);
@@ -197,28 +197,23 @@ function play() {
 
       if (netrunner.life < 0) {
          clearInterval(interval);
-         ctx.fillStyle = 'rgb(30, 30, 30)';
-         ctx.fillRect(0, 0, canvas.width, canvas.height);
-         ctx.font = '20px "Press Start 2P"';
-         ctx.fillStyle = 'white';
-         ctx.fillText('Game Over', 80, 250);
-         ctx.font = '30px Arial';
+         const gameOverImage = new Image();
+         gameOverImage.src = '../src/img/accessdenied.jpg';
+         gameOverImage.onload = function() {
+             ctx.drawImage(gameOverImage, 0, 0, 300, 500);
+         };
          document.removeEventListener('keydown', handleKeyDown);
       }
 
       // ---------------------- Winning Condition ----------------------- //
       if (netrunner.life > 8) {
          clearInterval(interval);
-         ctx.fillStyle = 'rgb(30, 30, 30)';
-         ctx.fillRect(0, 0, canvas.width, canvas.height);
-         ctx.font = '20px "Press Start 2P"';
-         ctx.fillStyle = 'white';
-         ctx.fillText('You Won', 80, 250);
-         ctx.font = '30px Arial';
+         const winImage = new Image();
+         winImage.src = '../src/img/accessgranted.jpg';
+         winImage.onload = function() {
+             ctx.drawImage(winImage, 0, 0, 300, 500);
+         };
          document.removeEventListener('keydown', handleKeyDown);
       }
-
-      
-
    }, 1000 / 60);
 }
