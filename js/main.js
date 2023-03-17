@@ -12,9 +12,13 @@ let netrunnerX = 0;
 // Initial frames
 let frames = 0;
 
-// Score value
+// Initial score value
 
 let score = 0;
+
+// Initialize the variable to store the keydown event listener
+
+let keydownEventListener = null;
 
 let framesVirus = 0;
 
@@ -57,6 +61,7 @@ document.addEventListener('keydown', (event) => {
          break;
    }
    console.log('netrunnerX:', netrunnerX);
+   document.addEventListener('keydown', keydownEventListener);
 });
 
 // -------------------------- Start the Game ------------------------------ //
@@ -111,7 +116,7 @@ function play() {
       framesVirus++;
 
       // generating a codesnippet every 150 frames:
-      if (frames % 150 === 0) {
+      if (framesVirus % 150 === 0) {
          // generate a random width for the obstacle:
          const randomWidth = Math.floor(Math.random() * 200) + 50;
 
@@ -173,10 +178,11 @@ function play() {
       // Draw blocks to visualize the score
       const blockWidth = 20;
       const blockHeight = 10;
+      
       for (let i = 0; i < score; i++) {
          const x = 10 + i * (blockWidth + 5); // calculate the x position of the block
          const y = 30; // set the y position of the block
-         ctx.fillStyle = 'white';
+         ctx.fillStyle = '#48ff00';
          ctx.fillRect(x, y, blockWidth, blockHeight); // draw the block
       }
 
@@ -190,7 +196,10 @@ function play() {
          ctx.fillStyle = 'white';
          ctx.fillText('Game Over', 80, 250);
          ctx.font = '30px Arial';
+          // Remove the keydown event listener
+   document.removeEventListener('keydown', keydownEventListener);
       }
+      
 
       // ---------------------- Winning Condition ----------------------- //
       if (netrunner.life > 8) {
@@ -201,6 +210,8 @@ function play() {
          ctx.fillStyle = 'white';
          ctx.fillText('You Won', 80, 250);
          ctx.font = '30px Arial';
+          // Remove the keydown event listener
+   document.removeEventListener('keydown', keydownEventListener);
       }
 
       // ---------------------- Remove code and virus when they go off the grid ----------------------- //
