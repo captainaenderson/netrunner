@@ -1,18 +1,21 @@
 class Netrunner {
     constructor(x, y, ctx, life){
-        this.height = 20;
-        this.width = 20;
+        this.height = 30;
+        this.width = 18;
         this.x = x;
         this.y = y;
         this.ctx = ctx;
-        this.color = "white";
         this.life = life;
         this.isTouched = false;
+        this.img = new Image();
+        this.img.onload = () => {
+            this.draw();
+        };
+        this.img.src = "../src/img/cursor.gif";
     }
 
-    draw() {
-        this.ctx.fillStyle = this.color;
-        this.ctx.fillRect(this.x, this.y, this.width, this.height);
+    draw(){
+        this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 
     moveRight() {

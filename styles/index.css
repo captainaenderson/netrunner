@@ -118,3 +118,8 @@ button:after {
    width: 1300px;
    position: absolute;
 }
+
+#logo {
+    height: 100px;
+    margin-left: 480px;
+}

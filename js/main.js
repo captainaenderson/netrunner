@@ -16,14 +16,10 @@ let frames = 0;
 
 let score = 0;
 
-// Initialize the variable to store the keydown event listener
-
-let keydownEventListener = null;
-
 let framesVirus = 0;
 
 // Create a Netrunner for the game
-const netrunner = new Netrunner(75, 470, ctx, 0);
+const netrunner = new Netrunner(75, 450, ctx, 0);
 
 // Create an array for the Code Snippets
 
@@ -43,7 +39,7 @@ function updateCanvas() {
 
 // -------------------------- Move the Netrunner ------------------------------ //
 
-document.addEventListener('keydown', (event) => {
+function handleKeyDown(event) {
    // updateCanvas();
    switch (event.code) {
       case 'ArrowRight':
@@ -60,9 +56,9 @@ document.addEventListener('keydown', (event) => {
          console.log('move left');
          break;
    }
-   console.log('netrunnerX:', netrunnerX);
-   document.addEventListener('keydown', keydownEventListener);
-});
+}
+
+
 
 // -------------------------- Start the Game ------------------------------ //
 
@@ -76,6 +72,7 @@ window.onload = () => {
 
 function play() {
    const interval = setInterval(function () {
+    document.addEventListener('keydown', handleKeyDown);
       updateCanvas();
 
       // ---------------------- Creating codesnippets and moving them ----------------------- //
@@ -134,7 +131,9 @@ function play() {
 
       // ---------------------- Gaining Code Points ----------------------- //
 
-      codesnippets.forEach((codesnippet) => {
+      const soundCodesnippet = new Audio('../src/sounds/codesnippet.mp3');
+
+      codesnippets.forEach((codesnippet, index) => {
          if (
             netrunner.x < codesnippet.x + codesnippet.width &&
             netrunner.x + netrunner.width > codesnippet.x &&
@@ -147,13 +146,17 @@ function play() {
                netrunner.gainsLife();
                codesnippet.isTouched = true; // mark the codesnippet as touched
                score++;
+               codesnippets.splice(index, 1); 
+               soundCodesnippet.play();
             }
          }
       });
 
       // ---------------------- Losing Code Points ----------------------- //
 
-      viruses.forEach((virus) => {
+      const soundVirus = new Audio('../src/sounds/virus.mp3');
+
+      viruses.forEach((virus, index) => {
          if (
             netrunner.x < virus.x + virus.width &&
             netrunner.x + netrunner.width > virus.x &&
@@ -166,19 +169,23 @@ function play() {
                netrunner.loseLife();
                virus.isTouched = true; // mark the codesnippet as touched
                score--;
+               viruses.splice(index, 1); 
+               soundVirus.play();
             }
          }
       });
 
       // Display the score in the canvas
+      ctx.fillStyle = 'rgb(30, 30, 30)'; // Set the background color
+      ctx.fillRect(0, 0, canvas.width, 10); // Draw a rectangle with the background color
       ctx.fillStyle = 'white';
-      ctx.font = '16px Arial';
+      ctx.font = '12px "Press Start 2P"';
       ctx.fillText(`Code loading.. `, 10, 20);
 
       // Draw blocks to visualize the score
       const blockWidth = 20;
       const blockHeight = 10;
-      
+
       for (let i = 0; i < score; i++) {
          const x = 10 + i * (blockWidth + 5); // calculate the x position of the block
          const y = 30; // set the y position of the block
@@ -196,10 +203,8 @@ function play() {
          ctx.fillStyle = 'white';
          ctx.fillText('Game Over', 80, 250);
          ctx.font = '30px Arial';
-          // Remove the keydown event listener
-   document.removeEventListener('keydown', keydownEventListener);
+         document.removeEventListener('keydown', handleKeyDown);
       }
-      
 
       // ---------------------- Winning Condition ----------------------- //
       if (netrunner.life > 8) {
@@ -210,10 +215,10 @@ function play() {
          ctx.fillStyle = 'white';
          ctx.fillText('You Won', 80, 250);
          ctx.font = '30px Arial';
-          // Remove the keydown event listener
-   document.removeEventListener('keydown', keydownEventListener);
+         document.removeEventListener('keydown', handleKeyDown);
       }
 
-      // ---------------------- Remove code and virus when they go off the grid ----------------------- //
+      
+
    }, 1000 / 60);
 }
