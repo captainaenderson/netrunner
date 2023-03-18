@@ -63,7 +63,7 @@ function handleKeyDown(event) {
 window.onload = () => {
    document.getElementById('start-button').onclick = () => {
       play();
-      const sound = new Audio('../src/sounds/background.mp3');
+      const sound = new Audio('../src/sounds/background.wav');
       sound.loop = true;
       sound.play();
    };
@@ -87,7 +87,7 @@ function play() {
       frames++;
 
       // generating a codesnippet every 100 frames:
-      if (frames % 100 === 0) {
+      if (frames % 80 === 0) {
          // generate a random width for the obstacle:
          const randomWidth = Math.floor(Math.random() * 200) + 50;
 
@@ -114,7 +114,7 @@ function play() {
       framesVirus++;
 
       // generating a codesnippet every 150 frames:
-      if (framesVirus % 150 === 0) {
+      if (framesVirus % 50 === 0) {
          // generate a random width for the obstacle:
          const randomWidth = Math.floor(Math.random() * 200) + 50;
 

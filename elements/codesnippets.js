@@ -10,6 +10,7 @@ class Codesnippets {
             this.draw();
         };
         this.img.src = "../src/img/code.gif";
+        
     }
 
     draw(){
@@ -18,7 +19,7 @@ class Codesnippets {
 
 
     moveDown() {
-        this.y += 1;
+        this.y += 4;
     }
 
     

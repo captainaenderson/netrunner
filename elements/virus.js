@@ -17,7 +17,7 @@ class Virus {
     }
 
     moveDown() {
-        this.y += 1;
+        this.y += 5;
     }
 }
 
