@@ -7,81 +7,95 @@ body {
 }
 
 button {
-    width: 220px;
-    height: 30px;
-    border: none;
-    outline: none;
-    color: #fff;
-    background: #111;
-    cursor: pointer;
-    border-radius: 10px;
-    text-transform: uppercase ;
-    font-family: "Press Start 2P";
-    font-size: 10px;
+   width: 220px;
+   height: 30px;
+   border: none;
+   outline: none;
+   color: #fff;
+   background: #111;
+   cursor: pointer;
+   border-radius: 10px;
+   text-transform: uppercase;
+   font-family: 'Press Start 2P';
+   font-size: 10px;
 }
 
 button:before {
-    content: '';
-    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-    position: absolute;
-    top: -2px;
-    left:-2px;
-    background-size: 400%;
-    z-index: -1;
-    filter: blur(5px);
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
-    animation: glowing 20s linear infinite;
-    opacity: 0;
-    transition: opacity .3s ease-in-out;
-    border-radius: 10px;
+   content: '';
+   background: linear-gradient(
+      45deg,
+      #ff0000,
+      #ff7300,
+      #fffb00,
+      #48ff00,
+      #00ffd5,
+      #002bff,
+      #7a00ff,
+      #ff00c8,
+      #ff0000
+   );
+   position: absolute;
+   top: -2px;
+   left: -2px;
+   background-size: 400%;
+   z-index: -1;
+   filter: blur(5px);
+   width: calc(100% + 4px);
+   height: calc(100% + 4px);
+   animation: glowing 20s linear infinite;
+   opacity: 0;
+   transition: opacity 0.3s ease-in-out;
+   border-radius: 10px;
 }
 
 button:active {
-    color: #000
+   color: #000;
 }
 
 button:active:after {
-    background: transparent;
+   background: transparent;
 }
 
 button:hover:before {
-    opacity: 1;
+   opacity: 1;
 }
 
 button:after {
-    z-index: -1;
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: #111;
-    left: 0;
-    top: 0;
-    border-radius: 10px;
+   z-index: -1;
+   content: '';
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   background: #111;
+   left: 0;
+   top: 0;
+   border-radius: 10px;
 }
 
 @keyframes glowing {
-    0% { background-position: 0 0; }
-    50% { background-position: 400% 0; }
-    100% { background-position: 0 0; }
+   0% {
+      background-position: 0 0;
+   }
+   50% {
+      background-position: 400% 0;
+   }
+   100% {
+      background-position: 0 0;
+   }
 }
-
-
-
 
 #start-button {
    display: flex;
    justify-content: center;
-   margin-top: 710px;
-   margin-left: 550px;
+   margin-top: 610px;
+   margin-left: 558px;
    position: fixed;
 }
 
 #canvas {
-    background-image: url('/src/img/background.jpg');
-    background-size: cover;
-    background-position: center;
+   background-image: url('/src/img/background.jpg');
+   background-size: cover;
+   background-position: center;
 }
 
 #animation {
@@ -93,11 +107,9 @@ button:after {
    height: 320px;
    width: 400px;
    margin-right: -34px;
-   
 }
 
 .grid {
-    
    display: flex;
    justify-content: center;
    margin-top: 250px;
@@ -123,6 +135,6 @@ button:after {
 }
 
 #logo {
-    height: 100px;
-    margin-left: 480px;
+   height: 100px;
+   margin-left: 480px;
 }
